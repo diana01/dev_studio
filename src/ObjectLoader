@@ -1,0 +1,53 @@
+package opengl;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ObjectLoader {
+	
+	List <Vertex> vertexList;
+	private String filename;
+	
+	public ObjectLoader(String filename) {
+		vertexList = new ArrayList<Vertex>();
+		loadFile(filename);
+		
+	}
+	
+	private void loadFile(String filename) {
+		try {
+			this.load(filename);
+			
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void load(String filename) throws IOException{
+		FileReader f = new FileReader(filename);
+		BufferedReader reader = new BufferedReader(f);
+		String line;
+		while(true) {
+			line = reader.readLine();
+			String [] currentLine = line.split(" ");
+			if(currentLine[0].equals("v")) {
+				float c1 = Float.parseFloat(currentLine[1]);
+				float c2 = Float.parseFloat(currentLine[2]);
+				float c3 = Float.parseFloat(currentLine[3]);
+				Vertex vertex = new Vertex(c1, c2, c3);
+				vertexList.add(vertex);
+			}
+				
+		reader.close();
+		}
+		
+		
+		
+	}
+	
+	
+
+}
