@@ -4,16 +4,24 @@ import static com.jogamp.opengl.GL.GL_DEPTH_BUFFER_BIT;
 import static com.jogamp.opengl.GL.GL_DEPTH_TEST;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.IOException;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JMenuItem;
 import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.jogamp.common.nio.Buffers;
 import com.jogamp.opengl.GL3;
@@ -31,7 +39,8 @@ public class ProjectClass implements GLEventListener {
 	private static GLJPanel panel;
 	private static int program;
 	private static int positionAttribute;
-	
+	private static ObjectLoader _obj;
+	private static boolean objloaded;
 	
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
@@ -54,9 +63,7 @@ public class ProjectClass implements GLEventListener {
 		
 		GLProfile profile = GLProfile.get(GLProfile.GL3);
 		JToolBar toolbarMenu = new JToolBar();
-		ImageIcon newObjectIcon = new ImageIcon("icons/addObjectIcon.png");
-		JButton newObject = new JButton(newObjectIcon);
-		toolbarMenu.add(newObject);
+		toolbarMenu.add(newObject());
 		frame.add(toolbarMenu, BorderLayout.NORTH);
         panel = new GLJPanel(new GLCapabilities(profile));
         panel.addGLEventListener(this);
@@ -100,18 +107,18 @@ public class ProjectClass implements GLEventListener {
 	public void init(GLAutoDrawable drawable) {
 		System.out.println("init");
 		GL3 gl = drawable.getGL().getGL3();
+		
 		initializeBuffers(gl);
 		initializeVertexArrays(gl);
 		
 	    createProgram(gl);
-	    
 	    gl.glClearColor(1f, 1f, 1f, 1f);
 	}
 
 
 	@Override
 	public void display(GLAutoDrawable drawable) {
-		System.out.println("display");
+//		System.out.println("display");
 		
 		GL3 gl = drawable.getGL().getGL3();
 		gl.glClear(GL3.GL_COLOR_BUFFER_BIT);
@@ -178,6 +185,30 @@ public class ProjectClass implements GLEventListener {
 	    gl.glAttachShader(program, fragmentShader);
 	    gl.glBindFragDataLocation(program, 0, "outColor");
 	    gl.glLinkProgram(program);
+	}
+	
+	private static JButton newObject(){
+		ImageIcon newObjectIcon = new ImageIcon("icons/addObjectIcon.png");
+		JButton newObject = new JButton(newObjectIcon);
+		class ListenerItemMenu implements ActionListener{
+			
+			public void actionPerformed(ActionEvent e) {
+				String userDir = System.getProperty("user.home");
+				JFileChooser chooser = new JFileChooser(userDir +"/Desktop");
+				chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+		        chooser.setAcceptAllFileFilterUsed(false);
+		        FileNameExtensionFilter filter = new FileNameExtensionFilter("Object files", "obj");
+		        chooser.addChoosableFileFilter(filter);
+				chooser.setVisible(true);
+				chooser.showOpenDialog(null);
+				File file = chooser.getSelectedFile();
+				_obj = new ObjectLoader(file.getAbsolutePath());
+				objloaded = true;
+//				autoDraw.display();
+			}	
+		}
+		newObject.addActionListener(new ListenerItemMenu());
+		return newObject;	
 	}
 }
 
