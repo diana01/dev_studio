@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { Evaluation } from './evaluation';
 
 @Component ({
-    //selector:
-    //templateUrl:
+    selector: 'my-evaluation',
+    templateUrl: './app/evaluation/evaluation.component.html'
 
 })
 

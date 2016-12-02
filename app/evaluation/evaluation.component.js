@@ -14,7 +14,10 @@ var EvaluationComponent = (function () {
         this.evaluations = new Array();
     }
     EvaluationComponent = __decorate([
-        core_1.Component({}), 
+        core_1.Component({
+            selector: 'my-evaluation',
+            templateUrl: './app/evaluation/evaluation.component.html'
+        }), 
         __metadata('design:paramtypes', [])
     ], EvaluationComponent);
     return EvaluationComponent;
