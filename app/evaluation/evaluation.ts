@@ -1,5 +1,8 @@
 export class Evaluation {
-        public id: number;
-        public evaluation: number;
-        public description: string;
+        
+        constructor(
+        public id: number,
+        public evaluation: boolean,
+        public description: string
+        ){}
 }

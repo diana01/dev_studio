@@ -1,4 +1,21 @@
 <h2>Evaluations</h2>
 <div *ngFor ="let eval of evaluations">
-    <p>{{eval.id}} - {{eval.description}}</p>
+    <p>{{eval.id}} - {{eval.description}} - Positive Evaluation: {{eval.evaluation}}</p>
+</div>
+<div>
+    {{model.id}} - {{model.description}} ({{model.evaluation}})
+</div>
+<div class="container">
+    <form (ngSubmit)="onSubmit()" #evaluationForm="ngForm">
+        <div class="form-group">
+            <label for="description"> Description: </label>
+            <input type="text" class="form-control" [(ngModel)]="model.description" name="description" value="" required>
+        </div>
+        <div class="form-group">
+            <p><label for="feedback">Feedback: </label></p>
+            <input type="radio" name="evaluation" [(ngModel)]="model.evaluation" class="form-control" value=false required> Negative
+            <input type="radio" name="evaluation" [(ngModel)]="model.evaluation" class="form-control"value=true required> Positive
+        </div>
+        <button type="submit" [disabled]="!evaluationForm.form.valid">Add Evaluation</button>
+    </form> 
 </div>
