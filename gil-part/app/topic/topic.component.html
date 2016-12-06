@@ -1,0 +1,17 @@
+<h2> My Requirements </h2>
+    <ul>
+        <li *ngFor="let topic of topics"> {{topic.name}} </li>
+    </ul>
+
+
+<!--<a routerLink = "/add-topic"> Add Topic </a>-->
+
+
+<div style ="text-align: center">
+    <a routerLink = "/add-topic">
+        <button type="button" class="btn btn-lg btn-default" style="width: 500px">
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        </button>
+    </a>
+
+</div>

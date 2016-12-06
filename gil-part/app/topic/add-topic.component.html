@@ -1,0 +1,37 @@
+<!--
+<h3> Add a Topic </h3>
+<div>
+    <label>Hero name: </label> <input #heroName/>
+    <button (click)="add(heroName.value); heroName.value =''"> Add </button>
+
+</div>
+-->
+<div class = "container">
+    <div class="col-md-12">
+        <h2 style="text-align: center">Add a new Requirement </h2>
+    </div>
+    <form class="form-horizontal" (ngSubmit)="add(model.name); onSubmit()"  #topicForm ="ngForm">
+       <div class="form-group">
+            <label for="name" class="col-sm-4 control-label">Name</label>
+                <div class="col-sm-4">
+                    <input type="text" placeholder ="Name of topic" class="form-control" id="name"
+                    required
+                    [(ngModel)]="model.name" name="name" #name="ngModel">
+                        <div [hidden]="name.valid || name.pristine" class="alert alert-danger"> 
+                            Name is required
+                        </div>
+                </div>
+        </div>
+        <div class="col-md-3 col-md-offset-7">
+            <button type="submit" class="btn btn-default btn-lg" [disabled]="!topicForm.form.valid" >Save</button>
+            <div [hidden]="!submitted" > Requirement saved </div>
+            
+        </div>
+        
+    </form>
+    
+</div>
+
+<!--onClick ="location.href='/topic'-->
+
+
