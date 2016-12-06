@@ -1,0 +1,71 @@
+<!--
+<h1> My Application </h1>
+<nav>
+    <a routerLink ="/topics" routerLinkActive="active"> Topics </a>
+    <a routerLink = "/add-topic"  routerLinkActive="active"> Add Topic </a>
+    
+
+</nav>
+<router-outlet></router-outlet>
+-->
+
+
+<nav class="navbar">
+      <div>
+          <div class="">
+              <img src="images/logo.png" alt="" style="float:left; width: 500px; height:auto; margin-top: 20px; margin-left: 10px" />
+          </div>
+          <div class="">
+              <img src="images/circle.png" alt="circle" style="width: 70px; margin-right: 10px; float:right; margin-top:10px" />
+          </div>
+          <div class="btn-group" style="float:right; margin-top:20px">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nome Apelido<span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                  <li><a href="#">Account</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">Log Out</a></li>
+              </ul>
+          </div>
+      </div>
+  </nav>
+
+  <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+
+          <ul class="nav navbar-nav">
+              <!--
+              <li class="active"><a onclick="location.href='frontpage.html'" href="#">Home</a></li>
+              <li><a onclick="location.href='template.html'" href="#">Templates</a></li>
+              <li><a onclick="location.href='requirement.html'" href="#">Topics</a></li>
+              -->
+              <li><a routerLink ="/topics" routerLinkActive="active"> Topics </a></li>
+          </ul>
+
+          <a class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" href="#" role="button" style="color: darkgray; float: right;">Create feedback »</a>
+          <div class="modal fade" id="myModal" role="dialog">
+              <div class="modal-dialog modal-lg">
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title">Create feedback</h4>
+                      </div>
+                      <div class="modal-body">
+                          <div class="col-md-6">
+                              <h3>Select template</h3>
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Select </button>
+                          </div>
+                          <div class="col-md-6">
+                              <h3> Create new </h3>
+                              <button onclick="location.href='CreateTemplate.html'" href="#" type="button" class="btn btn-default" data-dismiss="modal">Create</button>
+                          </div>
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </nav>
+  <router-outlet></router-outlet>
